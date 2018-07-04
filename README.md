@@ -43,7 +43,7 @@ docker-compose up
 Then run the tests:
 
 ```
-AWS_ACCESS_KEY_ID='y' AWS_SECRET_ACCESS_KEY='x' MONITORING_HOST='localhost' MONITORING_SCHEME='http' MONITORING_PORT="4582"  mix test
+AWS_ACCESS_KEY_ID='y' AWS_SECRET_ACCESS_KEY='x' USE_LOCALSTACK=1 mix test
 ```
 
 ## License
