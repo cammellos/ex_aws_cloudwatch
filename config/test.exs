@@ -1,8 +1,11 @@
 use Mix.Config
 
-{port, ""} = Integer.parse(System.get_env("MONITORING_PORT") || "443")
+if System.get_env("USE_LOCALSTACK") not in [nil, "", "0", "no"] do
 
-config :ex_aws, :monitoring,
-  scheme: System.get_env("MONITORING_SCHEME") || "https",
-  host: System.get_env("MONITORING_HOST") || "monitoring.us-east-1.amazonaws.com",
-  port: port
+  # see docker-compose.yml
+  # see https://github.com/localstack/localstack
+  config :ex_aws, :monitoring,
+         scheme: (if System.get_env("USE_SSL"), do: "https", else: "http"),
+         host: System.get_env("HOSTNAME") || "localhost",
+         port: 4582
+end
